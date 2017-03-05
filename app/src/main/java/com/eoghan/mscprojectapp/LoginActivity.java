@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        System.out.println("HERRRRRRE");
                         //Emulator Phone Number : 6505551212
                         if(response.equals("Cardiac Arrest")){
                             System.out.println("sending msg.");
