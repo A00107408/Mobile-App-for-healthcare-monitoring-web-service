@@ -1,3 +1,13 @@
+/* Student: A00107408
+ * Date: 2016-2017
+ * Project: Msc Software Engineering Project.
+ * College: Athlone Institute of Technology.
+ *
+ * Credits:
+ * Login Based On: https://github.com/tonikami/NEWLoginRegister.git (05-01-2017)
+ * Send SMS Based On: https://github.com/embeddedemily/emergency-text.git (05-01-2017)
+ */
+
 package com.eoghan.mscprojectapp;
 
 import com.android.volley.Response;
@@ -14,9 +24,9 @@ public class RegisterRequest extends StringRequest {
 
     /*
      * Android localhost
-     * http://10.0.2.2:9000/users
+     * http://10.0.2.2:9000/users 192.168.8.100
      */
-    private static final String REGISTER_REQUEST_URL = "http://10.0.2.2:9000/users";
+    private static final String REGISTER_REQUEST_URL = "http://192.168.8.100:9000/users";
     private Map<String, String> params;
 
     public RegisterRequest(String name, int age, String username, String password, Response.Listener<String> listener){

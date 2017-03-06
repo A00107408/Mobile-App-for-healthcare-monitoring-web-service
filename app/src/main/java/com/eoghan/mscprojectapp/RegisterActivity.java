@@ -1,3 +1,13 @@
+/* Student: A00107408
+ * Date: 2016-2017
+ * Project: Msc Software Engineering Project.
+ * College: Athlone Institute of Technology.
+ *
+ * Credits:
+ * Login Based On: https://github.com/tonikami/NEWLoginRegister.git (05-01-2017)
+ * Send SMS Based On: https://github.com/embeddedemily/emergency-text.git (05-01-2017)
+ */
+
 package com.eoghan.mscprojectapp;
 
 import android.content.Intent;

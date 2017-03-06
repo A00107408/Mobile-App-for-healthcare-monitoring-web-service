@@ -1,3 +1,13 @@
+/* Student: A00107408
+ * Date: 2016-2017
+ * Project: Msc Software Engineering Project.
+ * College: Athlone Institute of Technology.
+ *
+ * Credits:
+ * Login Based On: https://github.com/tonikami/NEWLoginRegister.git (05-01-2017)
+ * Send SMS Based On: https://github.com/embeddedemily/emergency-text.git (05-01-2017)
+ */
+
 package com.eoghan.mscprojectapp;
 
 import android.content.Intent;
@@ -45,36 +55,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
+                        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                        LoginActivity.this.startActivity(intent);
+
                         //Emulator Phone Number : 6505551212
-                        if(response.equals("Cardiac Arrest")){
+                        if(response.equals("Cardiac Arrest")) {
                             System.out.println("sending msg.");
                             SmsManager smsManager = SmsManager.getDefault();
-                            smsManager.sendTextMessage("6505551212" , null, "User In Distress.", null, null);
+                            //   smsManager.sendTextMessage("0851424508" , null, "User In Distress.", null, null);
                         }
-
-                        /* try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success){
-                                String name = jsonResponse.getString("name");
-                                int age = jsonResponse.getInt("age");
-
-                                Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                                intent.putExtra("name", name);
-                                intent.putExtra("username", username);
-                                intent.putExtra("age", age);
-                                LoginActivity.this.startActivity(intent);
-                            }else{
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login Failed")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-
                     }
                 };
 
