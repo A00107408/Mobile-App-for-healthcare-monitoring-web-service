@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserAreaActivity"></activity>
+        <activity android:name=".WarningActivity"></activity>
     </application>
 
 </manifest>

@@ -24,9 +24,9 @@ public class RegisterRequest extends StringRequest {
 
     /*
      * Android localhost
-     * http://10.0.2.2:9000/users 192.168.8.100
+     * http://10.0.2.2:9000/users
      */
-    private static final String REGISTER_REQUEST_URL = "http://192.168.8.100:9000/users";
+    private static final String REGISTER_REQUEST_URL = "http://10.0.2.2.101:9000/users";
     private Map<String, String> params;
 
     public RegisterRequest(String name, int age, String username, String password, Response.Listener<String> listener){

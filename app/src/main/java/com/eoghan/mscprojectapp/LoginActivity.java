@@ -13,7 +13,6 @@ package com.eoghan.mscprojectapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,28 +47,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final String username = etUserName.getText().toString();
-                final String password = etPassword.getText().toString();
+            final String username = etUserName.getText().toString();
+            final String password = etPassword.getText().toString();
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
 
-                        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                        LoginActivity.this.startActivity(intent);
+                if(response.equals("USER_FOUND")) {
+                    Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                    LoginActivity.this.startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                    LoginActivity.this.startActivity(intent);
+                }
+                }
+            };
 
-                        //Emulator Phone Number : 6505551212
-                        if(response.equals("Cardiac Arrest")) {
-                            System.out.println("sending msg.");
-                            SmsManager smsManager = SmsManager.getDefault();
-                            //   smsManager.sendTextMessage("0851424508" , null, "User In Distress.", null, null);
-                        }
-                    }
-                };
-
-                LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+            LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+            queue.add(loginRequest);
             }
         });
     }
