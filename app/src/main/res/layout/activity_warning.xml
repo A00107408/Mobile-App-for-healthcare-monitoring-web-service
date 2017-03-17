@@ -3,28 +3,47 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:maxWidth="40dp"
+        android:maxHeight="40dp"
+        android:src="@drawable/magheart"
+        android:alpha="0.5" />
+
     <TextView
         android:id="@+id/tvWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="false"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Click Reset button to monitor user again."
+        android:layout_above="@+id/bReset"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Click Reset button to monitor user again." />
+        android:layout_marginBottom="40dp" />
 
     <Button
         android:id="@+id/bReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Reset"
+        android:layout_marginBottom="34dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/bWarnLogout"
+        android:layout_marginEnd="16dp" />
+
+    <Button
+        android:id="@+id/bWarnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
         android:layout_below="@+id/tvReset"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Reset" />
+        android:layout_alignEnd="@+id/tvReset"
+        android:layout_marginEnd="28dp" />
 </RelativeLayout>

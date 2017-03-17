@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText etUserName = (EditText) findViewById(R.id.etUserName);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final EditText etURI = (EditText) findViewById(R.id.etURI);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
         final TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
@@ -49,19 +50,23 @@ public class LoginActivity extends AppCompatActivity {
 
             final String username = etUserName.getText().toString();
             final String password = etPassword.getText().toString();
+            final String url = etURI.getText().toString();
+
+            User.url = url;
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
-                if(response.equals("USER_FOUND")) {
-                    Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                    LoginActivity.this.startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                    LoginActivity.this.startActivity(intent);
-                }
+                    if(response.equals("USER_FOUND")) {
+                        User.name = username;
+                        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                        LoginActivity.this.startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                        LoginActivity.this.startActivity(intent);
+                    }
                 }
             };
 

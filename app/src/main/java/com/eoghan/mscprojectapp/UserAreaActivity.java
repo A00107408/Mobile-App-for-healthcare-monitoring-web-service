@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,7 +35,9 @@ public class UserAreaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_area);
 
         final EditText etICE = (EditText) findViewById(R.id.etICE);
+       // final EditText etUserName = (EditText) findViewById(R.id.etUserName);
 
+        final TextView tvICE = (TextView) findViewById(R.id.tvICE);
         final TextView welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMsg);
         final TextView listenMessage = (TextView) findViewById(R.id.tvListen);
 
@@ -53,7 +56,10 @@ public class UserAreaActivity extends AppCompatActivity {
 
             final String ICE = etICE.getText().toString();
 
-            String listening = "Listening to Pulse Service....";
+            tvICE.setVisibility(View.GONE);
+            etICE.setVisibility(View.GONE);
+
+            String listening = "Listening to Pulse Service... ";
             listenMessage.setText(listening);
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -61,32 +67,50 @@ public class UserAreaActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
 
-                    System.out.println("APP response: " + response);
+                if(User.name.equals("")){
+                    Toast.makeText(UserAreaActivity.this, "Session Expired. Please Log In.",
+                    Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(UserAreaActivity.this, LoginActivity.class);
+                    UserAreaActivity.this.startActivity(intent);
+                }
 
-                    if (response.equals("Cardiac Arrest")) {
-                        System.out.println("sending cardio SMS");
+                if (response.equals(User.name +"LOW")) {
+                    System.out.println("sending cardio low SMS");
 
-                        //Emulator Phone Number : 6505551212
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(ICE, null, "User In Cardiac Arrest.", null, null);
+                    //Emulator Phone Number : 6505551212
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(ICE, null, ""+User.name +"'s Heart Rate Critically Low.", null, null);
 
-                        STOP = true;
+                    STOP = true;
 
-                        Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
-                        UserAreaActivity.this.startActivity(intent);
-                    }
+                    Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
+                    UserAreaActivity.this.startActivity(intent);
+                }
 
-                    if (response.equals("Awake")) {
-                        System.out.println("sending awake SMS");
+                if (response.equals(User.name+"HIGH")) {
+                    System.out.println("sending cardio high SMS");
 
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(ICE, null, "User Is Awake.", null, null);
+                    //Emulator Phone Number : 6505551212
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(ICE, null, ""+User.name+"'s Heart Rate Critically High.", null, null);
 
-                        Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
-                        UserAreaActivity.this.startActivity(intent);
+                    STOP = true;
 
-                        STOP = true;
-                    }
+                    Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
+                    UserAreaActivity.this.startActivity(intent);
+                }
+
+                if (response.equals("AWAKE")) {
+                    System.out.println("sending awake SMS");
+
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(ICE, null, "User Is Awake.", null, null);
+
+                    Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
+                    UserAreaActivity.this.startActivity(intent);
+
+                    STOP = true;
+                }
                 }
             };
 
@@ -101,7 +125,7 @@ public class UserAreaActivity extends AppCompatActivity {
                         bListen.performClick();
                     }
                 }
-            }, 9000);
+            }, 5000);
             }
         });
     }

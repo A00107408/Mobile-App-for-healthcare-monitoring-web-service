@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +23,11 @@ public class WarningActivity extends AppCompatActivity {
         setContentView(R.layout.activity_warning);
 
         final Button bReset = (Button) findViewById(R.id.bReset);
+        final Button bLogout = (Button) findViewById(R.id.bWarnLogout);
+        final TextView warningMessage = (TextView) findViewById(R.id.tvWarning);
+
+        String message = "Warning Received from Pulse Services. SMS Sent to I.C.E.";
+        warningMessage.setText(message);
 
         bReset.setOnClickListener(new View.OnClickListener() {
 
@@ -33,8 +39,8 @@ public class WarningActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
 
-                    Intent intent = new Intent(WarningActivity.this, UserAreaActivity.class);
-                    WarningActivity.this.startActivity(intent);
+                Intent intent = new Intent(WarningActivity.this, UserAreaActivity.class);
+                WarningActivity.this.startActivity(intent);
                 }
             };
             ListenRequest listenRequest = new ListenRequest(responseListener);
@@ -42,5 +48,15 @@ public class WarningActivity extends AppCompatActivity {
             queue.add(listenRequest);
             }
         });
+        bLogout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+                Intent myIntent = new Intent(WarningActivity.this,
+                        LoginActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
 }
