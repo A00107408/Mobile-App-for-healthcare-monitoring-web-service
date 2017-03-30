@@ -22,19 +22,22 @@
         android:id="@+id/tvListen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bListen"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:text="listen"
+        android:gravity="center_horizontal"
+        android:layout_above="@+id/bListen"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/bListen"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listen..."
-        android:layout_marginBottom="11dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="62dp"
+        android:text="Listen" />
 
     <TextView
         android:id="@+id/tvICE"
@@ -57,5 +60,15 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:inputType="phone" />
+
+    <Button
+        android:id="@+id/bListenStop"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="Log Off"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

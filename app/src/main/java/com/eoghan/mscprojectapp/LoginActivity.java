@@ -34,11 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etURI = (EditText) findViewById(R.id.etURI);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
+
         final TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
+
+        etURI.setText(App.url, TextView.BufferType.EDITABLE);
+
 
         registerLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                final String url = etURI.getText().toString();
+                App.url = url;
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
             }
@@ -47,19 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            final String url = etURI.getText().toString();
             final String username = etUserName.getText().toString();
             final String password = etPassword.getText().toString();
-            final String url = etURI.getText().toString();
-
-            User.url = url;
+            App.url = url;
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
                     if(response.equals("USER_FOUND")) {
-                        User.name = username;
+                        App.userName = username;
                         Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
                         LoginActivity.this.startActivity(intent);
                     }

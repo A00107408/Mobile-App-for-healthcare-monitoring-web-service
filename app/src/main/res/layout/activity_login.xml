@@ -72,7 +72,6 @@
         android:layout_toEndOf="@+id/tvURL"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="10.0.2.2"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     <TextView

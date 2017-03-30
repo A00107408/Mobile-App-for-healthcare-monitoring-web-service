@@ -26,7 +26,7 @@ public class RegisterRequest extends StringRequest {
      * Android localhost
      * http://10.0.2.2:9000/androidUsers
      */
-    private static final String REGISTER_REQUEST_URL = "http://"+User.url+":9000/androidUsers";
+    private static final String REGISTER_REQUEST_URL = "http://" + App.url +":9000/androidUsers";
     private Map<String, String> params;
 
     public RegisterRequest(String name, int age, String username, String password, Response.Listener<String> listener){

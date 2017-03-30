@@ -9,7 +9,11 @@
         android:maxWidth="40dp"
         android:maxHeight="40dp"
         android:src="@drawable/magheart"
-        android:alpha="0.5" />
+        android:alpha="0.5"
+        android:layout_marginBottom="27dp"
+        android:layout_above="@+id/bReset"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageView" />
 
     <TextView
         android:id="@+id/tvWarning"
@@ -24,26 +28,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click Reset button to monitor user again."
-        android:layout_above="@+id/bReset"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="18dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toEndOf="@+id/tvWarning" />
 
     <Button
         android:id="@+id/bReset"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset"
-        android:layout_marginBottom="34dp"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/bWarnLogout"
-        android:layout_marginEnd="16dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="90dp"
+        android:text="Reset" />
 
     <Button
         android:id="@+id/bWarnLogout"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_below="@+id/tvReset"
-        android:layout_alignEnd="@+id/tvReset"
-        android:layout_marginEnd="28dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="26dp"
+        android:text="Logout" />
 </RelativeLayout>

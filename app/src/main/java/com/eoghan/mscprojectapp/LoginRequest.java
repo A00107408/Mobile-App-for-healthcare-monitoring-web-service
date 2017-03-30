@@ -26,7 +26,7 @@ public class LoginRequest extends StringRequest {
      * Emulator localhost
      * http://10.0.2.2:9000/androidLogin
      */
-    private static final String LOGIN_REQUEST_URL = "http://"+User.url+":9000/androidLogin";
+    private static final String LOGIN_REQUEST_URL = "http://"+ App.url+":9000/androidLogin";
     private Map<String, String> params;
 
     public LoginRequest(String username, String password, Response.Listener<String> listener){

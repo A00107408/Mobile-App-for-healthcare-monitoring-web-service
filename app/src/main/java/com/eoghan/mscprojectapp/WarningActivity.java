@@ -38,7 +38,6 @@ public class WarningActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(String response) {
-
                 Intent intent = new Intent(WarningActivity.this, UserAreaActivity.class);
                 WarningActivity.this.startActivity(intent);
                 }
