@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
 
         etURI.setText(App.url, TextView.BufferType.EDITABLE);
 
-
         registerLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

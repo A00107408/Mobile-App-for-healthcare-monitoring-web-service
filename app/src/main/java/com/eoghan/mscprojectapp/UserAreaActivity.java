@@ -41,8 +41,8 @@ public class UserAreaActivity extends AppCompatActivity {
     boolean STOP = false;
     private LocationManager locationManager;
     private LocationListener locationListener;
-    private double latitude;
-    private double longitude;
+ //   private double latitude;
+ //   private double longitude;
     private String LKL = "No Location Available";
 
 
@@ -88,7 +88,6 @@ public class UserAreaActivity extends AppCompatActivity {
                 listenMessage.setText(listening);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-
                     @Override
                     public void onResponse(String response) {
 
@@ -188,7 +187,7 @@ public class UserAreaActivity extends AppCompatActivity {
                             STOP = true;
                         }
 
-                        if (response.equals(App.userName + "DYING")) {
+                        if ( response.equals(App.userName + "BRADY") ) {
                             System.out.println("sending dying SMS");
 
                             getCoords();
@@ -198,7 +197,28 @@ public class UserAreaActivity extends AppCompatActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    smsManager.sendTextMessage(ICE, null, "" + App.userName + "'s BPM Critical.\n" + LKL
+                                    smsManager.sendTextMessage(ICE, null, "" + App.userName + " has Bradycardia.\n" + LKL
+                                            +"\n" + App.userName +": " +mPhoneNumber, null, null);
+                                }
+                            }, 25000);
+
+                            STOP = true;
+
+                            Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
+                            UserAreaActivity.this.startActivity(intent);
+                        }
+
+                        if ( response.equals(App.userName + "TACHY") ) {
+                            System.out.println("sending dying SMS");
+
+                            getCoords();
+
+                            //Wait for any coords before texting.
+                            //20 Seconds arrived at during testing.
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    smsManager.sendTextMessage(ICE, null, "" + App.userName + " has Tachycardia.\n" + LKL
                                             +"\n" + App.userName +": " +mPhoneNumber, null, null);
                                 }
                             }, 25000);
@@ -219,7 +239,7 @@ public class UserAreaActivity extends AppCompatActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    smsManager.sendTextMessage(ICE, null, "" + App.userName + " Deceased.\n" + LKL
+                                    smsManager.sendTextMessage(ICE, null, "" + App.userName + " is Deceased.\n" + LKL
                                             +"\n" + App.userName +": " +mPhoneNumber, null, null);
                                 }
                             }, 25000);
@@ -232,9 +252,10 @@ public class UserAreaActivity extends AppCompatActivity {
                     }
                 };
 
-                ListenRequest listenRequest = new ListenRequest(responseListener);
-                RequestQueue queue = Volley.newRequestQueue(UserAreaActivity.this);
+                final ListenRequest listenRequest = new ListenRequest(responseListener);
+                final RequestQueue queue = Volley.newRequestQueue(UserAreaActivity.this);
                 queue.add(listenRequest);
+                queue.getCache().remove(String.valueOf(listenRequest)); // Clear Volley Cache.
 
                 //Poll server every 5 secs.
                 new Handler().postDelayed(new Runnable() {
@@ -271,8 +292,8 @@ public class UserAreaActivity extends AppCompatActivity {
 
                 LKL = "https://maps.google.com/maps?q=";
 
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
+               double latitude = location.getLatitude();
+               double longitude = location.getLongitude();
 
                 String lat = String.valueOf(latitude);
                 String lon = String.valueOf(longitude);
@@ -314,10 +335,13 @@ public class UserAreaActivity extends AppCompatActivity {
              * param 3 = no movement.
              * In other words, just return coordinates without location update.
              * Will call onLocationChanged with result.
+             * Get either network or GPS Location
              */
-            locationManager.requestLocationUpdates("gps", 1, 0f, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates("gps", 0L, 0.0f, locationListener);
+
         }
-        STOP = true;
+       // STOP = true;
         return;
     }
 
