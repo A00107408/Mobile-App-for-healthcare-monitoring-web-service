@@ -7,7 +7,7 @@ package com.eoghan.mscprojectapp;
 public class App {
 
     //Server URI default Android localhost.
-    public static String url = "10.0.2.2";
+    public static String url = "192.168.8.100"; //"10.0.2.2";
 
     //Session
     public static String userName = "";

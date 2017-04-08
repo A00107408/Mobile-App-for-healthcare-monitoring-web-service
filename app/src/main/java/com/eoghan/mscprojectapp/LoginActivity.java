@@ -12,6 +12,7 @@ package com.eoghan.mscprojectapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -61,13 +62,16 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
 
-                    if(response.equals("USER_FOUND")) {
-                        App.userName = username;
-                        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                        LoginActivity.this.startActivity(intent);
+                    if(response.equals("NOT_FOUND")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Login Failed. Please Try Again.")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     }
                     else{
-                        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                        App.userName = response;
+                        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
                         LoginActivity.this.startActivity(intent);
                     }
                 }
