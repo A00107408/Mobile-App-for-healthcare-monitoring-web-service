@@ -38,7 +38,7 @@ import com.android.volley.toolbox.Volley;
 
 public class UserAreaActivity extends AppCompatActivity {
 
-    boolean STOP = false;
+   //STOP = false;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private String LKL = "No Location Available";
@@ -48,6 +48,7 @@ public class UserAreaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        App.STOP = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
 
@@ -89,7 +90,7 @@ public class UserAreaActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        System.out.println("response: " +response);
+                        //System.out.println("response: " +response);
                         //Emulator Phone Number : 6505551212
                         final SmsManager smsManager = SmsManager.getDefault();
 
@@ -125,7 +126,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 }
                             }, 25000);
 
-                            STOP = true;
+                            App.STOP = true;
 
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
@@ -146,7 +147,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 }
                             }, 25000);
 
-                            STOP = true;
+                            App.STOP = true;
 
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
@@ -170,7 +171,7 @@ public class UserAreaActivity extends AppCompatActivity {
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
 
-                            STOP = true;
+                            App.STOP = true;
                         }
 
                         if (response.equals(App.userName + "AWAKE")) {
@@ -191,7 +192,7 @@ public class UserAreaActivity extends AppCompatActivity {
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
 
-                            STOP = true;
+                            App.STOP = true;
                         }
 
                         if ( response.equals(App.userName + "BRADY") ) {
@@ -209,7 +210,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 }
                             }, 25000);
 
-                            STOP = true;
+                            App.STOP = true;
 
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
@@ -230,7 +231,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 }
                             }, 25000);
 
-                            STOP = true;
+                            App.STOP = true;
 
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
@@ -251,7 +252,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 }
                             }, 25000);
 
-                            STOP = true;
+                            App.STOP = true;
 
                             Intent intent = new Intent(UserAreaActivity.this, WarningActivity.class);
                             UserAreaActivity.this.startActivity(intent);
@@ -268,7 +269,7 @@ public class UserAreaActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (STOP == false) {
+                        if (App.STOP == false) {
                             bListen.performClick();
                         }
                     }
@@ -280,6 +281,7 @@ public class UserAreaActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                App.STOP = true;
                 Intent intent = new Intent(UserAreaActivity.this, LoginActivity.class);
                 UserAreaActivity.this.startActivity(intent);
             }

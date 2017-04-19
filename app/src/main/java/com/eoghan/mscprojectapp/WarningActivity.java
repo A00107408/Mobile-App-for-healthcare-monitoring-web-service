@@ -71,6 +71,7 @@ public class WarningActivity extends AppCompatActivity {
         bLogout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
+                App.STOP = true;
                 // Start NewActivity.class
                 Intent myIntent = new Intent(WarningActivity.this,
                         LoginActivity.class);

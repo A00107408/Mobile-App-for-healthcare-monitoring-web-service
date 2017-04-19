@@ -14,4 +14,6 @@ public class App {
 
     //I.C.E
     public static String ice = "";
+
+    public static boolean STOP = false;
 }
