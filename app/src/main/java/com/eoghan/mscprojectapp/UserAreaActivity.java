@@ -41,9 +41,8 @@ public class UserAreaActivity extends AppCompatActivity {
     boolean STOP = false;
     private LocationManager locationManager;
     private LocationListener locationListener;
- //   private double latitude;
- //   private double longitude;
     private String LKL = "No Location Available";
+    private String PhoneNumber = "No. Unavailable";
 
 
     @Override
@@ -75,7 +74,6 @@ public class UserAreaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 final String ICE = etICE.getText().toString();
                 App.ice = ICE;
 
@@ -91,11 +89,20 @@ public class UserAreaActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
+                        System.out.println("response: " +response);
                         //Emulator Phone Number : 6505551212
                         final SmsManager smsManager = SmsManager.getDefault();
-                        TelephonyManager tMgr =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                        final String mPhoneNumber = tMgr.getLine1Number();
 
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            //Device newer than lollipop
+                            //new library for phone number.
+                        }else {
+                            TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                            final String mPhoneNumber = tMgr.getLine1Number(); //Wont work on older devices either
+                            if (!"".equals(mPhoneNumber)) {
+                                PhoneNumber = mPhoneNumber;
+                            }
+                        }
                         if (App.userName.equals("")) {
                             Toast.makeText(UserAreaActivity.this, "Session Expired. Please Log In.",
                                     Toast.LENGTH_LONG).show();
@@ -114,7 +121,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + "'s BPM Below Threshold.\n" + LKL
-                                            +"\nTry contact " + App.userName + ": " +mPhoneNumber, null, null);
+                                            +"\nTry contact " + App.userName + ": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -135,7 +142,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + "'s BPM Above Threshold.\n"
-                                            + LKL +"\nTry contact " + App.userName + ": " +mPhoneNumber, null, null);
+                                            + LKL +"\nTry contact " + App.userName + ": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -156,7 +163,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + " fell alseep.\n"
-                                             + LKL + App.userName + ": " +mPhoneNumber, null, null);
+                                             + LKL +"\n" +App.userName + ": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -177,7 +184,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + " has awakened.\n"
-                                             + LKL + App.userName + ": " +mPhoneNumber, null, null);
+                                             + LKL +"\n" +App.userName + ": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -198,7 +205,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + " has Bradycardia.\n" + LKL
-                                            +"\n" + App.userName +": " +mPhoneNumber, null, null);
+                                            +"\n" + App.userName +": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -219,7 +226,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + " has Tachycardia.\n" + LKL
-                                            +"\n" + App.userName +": " +mPhoneNumber, null, null);
+                                            +"\n" + App.userName +": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -240,7 +247,7 @@ public class UserAreaActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     smsManager.sendTextMessage(ICE, null, "" + App.userName + " is Deceased.\n" + LKL
-                                            +"\n" + App.userName +": " +mPhoneNumber, null, null);
+                                            +"\n" + App.userName +": " +PhoneNumber, null, null);
                                 }
                             }, 25000);
 
@@ -319,7 +326,6 @@ public class UserAreaActivity extends AppCompatActivity {
             }
         };
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
             // Prompt user to turn on location services.
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{
@@ -341,7 +347,6 @@ public class UserAreaActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates("gps", 0L, 0.0f, locationListener);
 
         }
-       // STOP = true;
         return;
     }
 
@@ -358,8 +363,7 @@ public class UserAreaActivity extends AppCompatActivity {
         switch (requestCode){
             case 10:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(UserAreaActivity.this, "GPS is on?",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserAreaActivity.this, "GPS is on?", Toast.LENGTH_SHORT).show();
                 }
         }
     }

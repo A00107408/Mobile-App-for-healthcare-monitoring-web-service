@@ -22,12 +22,32 @@ public class WarningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_warning);
 
+        final Button bClear = (Button) findViewById(R.id.bClear);
         final Button bReset = (Button) findViewById(R.id.bReset);
         final Button bLogout = (Button) findViewById(R.id.bWarnLogout);
         final TextView warningMessage = (TextView) findViewById(R.id.tvWarning);
 
         String message = "Warning Received from Pulse Services. SMS Sent to I.C.E.";
         warningMessage.setText(message);
+
+        bClear.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                       // Intent intent = new Intent(WarningActivity.this, WarningActivity.class);
+                       // WarningActivity.this.startActivity(intent);
+                    }
+                };
+                ClearRequest clearRequest = new ClearRequest(responseListener);
+                RequestQueue queue = Volley.newRequestQueue(WarningActivity.this);
+                queue.add(clearRequest);
+            }
+        });
 
         bReset.setOnClickListener(new View.OnClickListener() {
 
@@ -47,6 +67,7 @@ public class WarningActivity extends AppCompatActivity {
             queue.add(listenRequest);
             }
         });
+
         bLogout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 

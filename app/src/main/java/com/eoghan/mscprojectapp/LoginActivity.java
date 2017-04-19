@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginRequest);
+           // queue.getCache().remove(String.valueOf(loginRequest)); // Clear Volley Cache.
             }
         });
     }

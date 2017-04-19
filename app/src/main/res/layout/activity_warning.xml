@@ -10,10 +10,10 @@
         android:maxHeight="40dp"
         android:src="@drawable/magheart"
         android:alpha="0.5"
-        android:layout_marginBottom="27dp"
-        android:layout_above="@+id/bReset"
-        android:layout_alignParentStart="true"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        android:layout_marginBottom="43dp"
+        android:layout_above="@+id/bClear"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvWarning"
@@ -28,29 +28,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click Reset button to monitor user again."
-        android:layout_marginBottom="18dp"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_toEndOf="@+id/tvWarning" />
+        android:layout_above="@+id/bClear"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/bReset"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:text="Reset"
+        android:layout_above="@+id/bWarnLogout"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="90dp"
-        android:text="Reset" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/bWarnLogout"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Logout"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp"
-        android:text="Logout" />
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/bClear"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bReset"
+        android:layout_alignParentStart="true"
+        android:text="Clear Warnings"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

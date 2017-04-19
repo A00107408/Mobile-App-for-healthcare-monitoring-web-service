@@ -32,7 +32,6 @@ public class LoginRequest extends StringRequest {
     public LoginRequest(String username, String password, Response.Listener<String> listener){
 
         super(Method.POST,LOGIN_REQUEST_URL, listener, null);
-        //System.out.println("uri: " +LOGIN_REQUEST_URL);
 
         params = new HashMap<>();
         params.put("username", username);

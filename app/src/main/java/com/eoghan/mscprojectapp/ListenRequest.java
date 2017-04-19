@@ -14,7 +14,7 @@ public class ListenRequest extends StringRequest {
     * Emulator localhost
     * http://10.0.2.2:9000/androidLogin
     */
-    private static final String LISTEN_REQUEST_URL = "http://"+ App.url+":9000/androidListen";
+    private static final String LISTEN_REQUEST_URL = "http://"+ App.url+":9000/androidListen" +App.userName;
 
     public ListenRequest(Response.Listener<String> listener) {
 
